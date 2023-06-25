@@ -6,9 +6,9 @@ pipeline {
             steps {
                 echo 'Hello, I am building environment'
                 sh """
-                touch test.txt
-                echo "i am testing file" >> test.txt
-                zip test.zip test.txt
+                touch vineet.txt
+                echo "i am testing file" >> vineet.txt
+                zip test.zip vineet.txt
                 """
             }
         }
