@@ -1,3 +1,5 @@
+dirname=vineetest
+filename=testfile
 sudo mkdir -p $dirname
 sudo cd $dirname
 sudo touch $dirname/$filename
