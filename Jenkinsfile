@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'Hello, I am building environment'
                 sh """
-                mkdir test.txt
+                touch test.txt
                 echo "i am testing file" >> test.txt
                 zip test.zip test.txt
                 """
