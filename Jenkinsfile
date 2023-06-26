@@ -27,7 +27,7 @@ pipeline {
         stage('upload') {
            steps {
               script { 
-                 def server = Artifactory.server 'art-1'
+                 def server = Artifactory.server 'artifactory'
                  def uploadSpec = """{
                     "files": [{
                        "pattern": "/var/lib/jenkins/workspace/vineetpipepline/",
