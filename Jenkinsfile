@@ -24,5 +24,21 @@ pipeline {
                 echo 'Hello, I am testingenvironment'
             }
         }
+        stage('upload') {
+           steps {
+              script { 
+                 def server = Artifactory.server 'art-1'
+                 def uploadSpec = """{
+                    "files": [{
+                       "pattern": "/var/lib/jenkins/workspace/vineetpipepline/",
+                       "target": "./*.zip",
+                       "recursive": "false"
+                    }]
+                 }"""
+
+                 server.upload(uploadSpec) 
+               }
+            }
+        }
     }
 }
