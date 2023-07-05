@@ -1,14 +1,38 @@
+properties([
+    parameters([
+        choice(
+            name: 'ENV',
+            choices: [
+                'dev',
+                'prod'
+            ]
+        ),
+        [$class: 'ChoiceParameter',
+            choiceType: 'PT_RADIO',
+            filterLength: 1,
+            filterable: false,
+            name: 'CHOICES',
+            script: [
+                $class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [],
+                    sandbox: false,
+                    script: 'return ["Check Jenkins ScriptApproval page"]'
+                ],
+                script: [
+                    classpath: [],
+                    sandbox: false,
+                    script: 'return ["One","Two:selected"]'
+                ]
+            ]
+        ]
+    ])
+])
+
 pipeline {
     agent any
     parameters {
         string(name: 'File', defaultValue: 'File1', description: 'Who should I say hello to?')
-        activeChoiceParam('deploy') {
-          choiceType('RADIO')
-          groovyScript {
-            script("return ['true', 'false']")
-            fallbackScript("return ['error']")
-          }
-        }
     }
     stages {
         stage('Build') {
