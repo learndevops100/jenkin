@@ -6,14 +6,12 @@ properties([
                                     filterLength: 1, 
                                     filterable: false, 
                                     name: 'data_center', 
-                                    
-                                        script: [
-                                            classpath: [], 
-                                            sandbox: false, 
-                                            script: 
-                                                "return['DC01', 'DC02', 'DC03']"
-                                        ]
-                                    ]
+                                      script: [
+                                        classpath: [], 
+                                        sandbox: false, 
+                                        script: 
+                                            "return['DC01', 'DC02', 'DC03']"
+                                      ]
                                 ],
                                 [$class: 'DynamicReferenceParameter', 
                                     choiceType: 'ET_FORMATTED_HTML', 
