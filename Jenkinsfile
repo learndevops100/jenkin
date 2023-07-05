@@ -43,7 +43,7 @@ pipeline {
                                         script: [
                                                 classpath: [], 
                                                 sandbox: false, 
-                                                script: '''
+                                                script: """
                                                 if (Env == 'dev'){
                                                     return["ami-sd2345sd", "ami-asdf245sdf", "ami-asdf3245sd"]
                                                 }
@@ -53,7 +53,7 @@ pipeline {
                                                 else if(Env == 'prod'){
                                                     return["ami-sdf34sdf", "ami-sdf34ds", "ami-sdf3sf3"]
                                                 }
-                                                '''
+                                                """
                                             ] 
                                     ]
                                 ],
