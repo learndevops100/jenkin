@@ -1,10 +1,7 @@
 pipeline {
     agent any
-    parameters {
-        string(name: 'File', defaultValue: 'File1', description: 'Who should I say hello to?')
-    }
-    stages {
-        stage('Parameters'){
+        stages {
+            stage('Parameters'){
                 steps {
                     script {
                     properties([
@@ -17,10 +14,18 @@ pipeline {
                                     name: 'Env', 
                                     script: [
                                         $class: 'GroovyScript', 
-                                        classpath: [], 
+                                        fallbackScript: [
+                                            classpath: [], 
+                                            sandbox: false, 
+                                            script: 
+                                                "return['Could not get The environemnts']"
+                                        ], 
+                                        script: [
+                                            classpath: [], 
                                             sandbox: false, 
                                             script: 
                                                 "return['dev','stage','prod']"
+                                        ]
                                     ]
                                 ],
                                 [$class: 'CascadeChoiceParameter', 
@@ -54,7 +59,7 @@ pipeline {
                                 ],
                                 [$class: 'DynamicReferenceParameter', 
                                     choiceType: 'ET_ORDERED_LIST', 
-                                    description: 'Select the  AMI based on the following infomration', 
+                                    description: 'Select the  AMI based on the following information', 
                                     name: 'Image Information', 
                                     referencedParameters: 'Env', 
                                     script: 
@@ -80,30 +85,5 @@ pipeline {
                     }
                 }
             }
-        stage('Build') {
-            steps {
-                echo 'Hello, I am building environment'
-                sh """
-                touch vineet.txt
-                echo "i am testing file" >> vineet.txt
-                zip test.zip vineet.txt
-                """
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Hello, I am deploying environment'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Hello, I am testingenvironment'
-            }
-        }
-        stage('upload') {
-           steps {
-               echo 'Hello I am uplaodung '
-            }
-        }
-    }
+        }   
 }
