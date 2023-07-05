@@ -44,13 +44,13 @@ pipeline {
                                                 classpath: [], 
                                                 sandbox: false, 
                                                 script: '''
-                                                if (Env.equals("dev")){
+                                                if (Env == 'dev'){
                                                     return["ami-sd2345sd", "ami-asdf245sdf", "ami-asdf3245sd"]
                                                 }
-                                                else if(Env.equals("stage")){
+                                                else if(Env == 'stage'){
                                                     return["ami-sd34sdf", "ami-sdf345sdc", "ami-sdf34sdf"]
                                                 }
-                                                else if(Env.equals("prod")){
+                                                else if(Env == 'prod'){
                                                     return["ami-sdf34sdf", "ami-sdf34ds", "ami-sdf3sf3"]
                                                 }
                                                 '''
