@@ -17,13 +17,10 @@ pipeline {
                                     name: 'Env', 
                                     script: [
                                         $class: 'GroovyScript', 
-                                        
-                                        script: [
-                                            classpath: [], 
+                                        classpath: [], 
                                             sandbox: false, 
                                             script: 
                                                 "return['dev','stage','prod']"
-                                        ]
                                     ]
                                 ],
                                 [$class: 'CascadeChoiceParameter', 
