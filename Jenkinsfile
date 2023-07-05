@@ -6,14 +6,7 @@ properties([
                                     filterLength: 1, 
                                     filterable: false, 
                                     name: 'data_center', 
-                                    script: [
-                                        $class: 'GroovyScript', 
-                                        fallbackScript: [
-                                            classpath: [], 
-                                            sandbox: false, 
-                                            script: 
-                                                "return['Could not get the services list']"
-                                        ], 
+                                    
                                         script: [
                                             classpath: [], 
                                             sandbox: false, 
