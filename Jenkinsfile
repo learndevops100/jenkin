@@ -1,64 +1,82 @@
 pipeline {
     agent any
-parameters([
-choice(name:"NeedUpgradePC",choices:['yes','no'],description: "Do you need upgrade your PC"),
-                    [$class: 'DynamicReferenceParameter',
-                            choiceType: 'ET_FORMATTED_HTML',
-                            omitValueField: true,
-                            description: 'Please provide a Elastic alias label',
-                            name: 'PC_RAM',
-                            randomName: 'choice-parameter-5631314456178624',
-                            referencedParameters: 'NeedUpgradePC',
-                            script: [
-                                    $class: 'GroovyScript',
-                                    fallbackScript: [
-                                            classpath: [],
-                                            sandbox: true,
-                                            script:
-                                                    'return[\'nothing.....\']'
-                                    ],
+    parameters {
+        string(name: 'File', defaultValue: 'File1', description: 'Who should I say hello to?')
+    }
+    stages {
+        stage('Parameters'){
+                steps {
+                    script {
+                    properties([
+                            parameters([
+                                [$class: 'ChoiceParameter', 
+                                    choiceType: 'PT_SINGLE_SELECT', 
+                                    description: 'Select the Environemnt from the Dropdown List', 
+                                    filterLength: 1, 
+                                    filterable: false, 
+                                    name: 'Env', 
                                     script: [
-                                            classpath: [],
-                                            sandbox: true,
-                                            script:
-                                                    """
-                                    if(NeedUpgradePC.equals('yes')) {
-                                        inputBox="<input name='value' type='text' value='Kingston 8GB'>"
-                                    } else {
-                                        inputBox="<input name='value' type='text' value='Kingston 8GB' disabled>"
-                                    }
-                                """
+                                        $class: 'GroovyScript', 
+                                        classpath: [], 
+                                            sandbox: false, 
+                                            script: 
+                                                "return['dev','stage','prod']"
                                     ]
-                            ]
-                         ],
-                            [$class: 'DynamicReferenceParameter',
-                                    choiceType: 'ET_FORMATTED_HTML',
-                                    omitValueField: true,
-                                    description: 'Please provide a Elastic alias label',
-                                    name: 'PC_CPU',
-                                    randomName: 'choice-parameter-5631314456178624',
-                                    referencedParameters: 'NeedUpgradePC',
-                                    script: [
-                                            $class: 'GroovyScript',
-                                            fallbackScript: [
-                                                    classpath: [],
-                                                    sandbox: true,
-                                                    script:
-                                                            'return[\'nothing.....\']'
-                                            ],
-                                            script: [
-                                                    classpath: [],
-                                                    sandbox: true,
-                                                    script:
-                                                            """
-                                    if(NeedUpgradePC.equals('yes')) {
-                                        inputBox="<input name='value' type='text' value='Intel Core i5'>"
-                                    } else {
-                                        inputBox="<input name='value' type='text' value='Intel Core i5' disabled>"
-                                    }
-                                """
-                                            ]
+                                ],
+                                [$class: 'CascadeChoiceParameter', 
+                                    choiceType: 'PT_SINGLE_SELECT', 
+                                    description: 'Select the AMI from the Dropdown List',
+                                    name: 'AMI List', 
+                                    referencedParameters: 'Env', 
+                                    script: 
+                                        [$class: 'GroovyScript', 
+                                        fallbackScript: [
+                                                classpath: [], 
+                                                sandbox: false, 
+                                                script: "return['Could not get Environment from Env Param']"
+                                                ], 
+                                        script: [
+                                                classpath: [], 
+                                                sandbox: false, 
+                                                script: '''
+                                                if (Env.equals("dev")){
+                                                    return["ami-sd2345sd", "ami-asdf245sdf", "ami-asdf3245sd"]
+                                                }
+                                                else if(Env.equals("stage")){
+                                                    return["ami-sd34sdf", "ami-sdf345sdc", "ami-sdf34sdf"]
+                                                }
+                                                else if(Env.equals("prod")){
+                                                    return["ami-sdf34sdf", "ami-sdf34ds", "ami-sdf3sf3"]
+                                                }
+                                                '''
+                                            ] 
                                     ]
-                            ]
-    ])
-}
+                                ],
+                                [$class: 'DynamicReferenceParameter', 
+                                    choiceType: 'ET_ORDERED_LIST', 
+                                    description: 'Select the  AMI based on the following infomration', 
+                                    name: 'Image Information', 
+                                    referencedParameters: 'Env', 
+                                    script: 
+                                        [$class: 'GroovyScript', 
+                                        script: 'return["Could not get AMi Information"]', 
+                                        script: [
+                                            script: '''
+                                                    if (Env.equals("dev")){
+                                                        return["ami-sd2345sd:  AMI with Java", "ami-asdf245sdf: AMI with Python", "ami-asdf3245sd: AMI with Groovy"]
+                                                    }
+                                                    else if(Env.equals("stage")){
+                                                        return["ami-sd34sdf:  AMI with Java", "ami-sdf345sdc: AMI with Python", "ami-sdf34sdf: AMI with Groovy"]
+                                                    }
+                                                    else if(Env.equals("prod")){
+                                                        return["ami-sdf34sdf:  AMI with Java", "ami-sdf34ds: AMI with Python", "ami-sdf3sf3: AMI with Groovy"]
+                                                    }
+                                                    '''
+                                                ]
+                                        ]
+                                ]
+                            ])
+                        ])
+                    }
+                }
+            }
