@@ -27,7 +27,7 @@ pipeline {
                                                 "return['branch','tag']"
                                         ]
                                     ],
-                                    [$class: 'DynamicReferenceParameter', 
+                                [$class: 'DynamicReferenceParameter', 
                                     choiceType: 'ET_FORMATTED_HTML', 
                                     description: 'Please write branch name',
                                     name: 'Branch',
@@ -46,12 +46,12 @@ pipeline {
                                                 script: '''
                                                 if (Option.equals("branch")){
                                                     inputBox = "<input name='value' class='setting-input' type='text'>"
-                                                    return inputBox                                                    
+                                    ]                return inputBox                                                    
                                                 }                                                
                                                 '''
                                             ] 
                                     ]
-                                ]
+                                 ]
                                 ]
                             ])
                         ])
