@@ -1,3 +1,4 @@
+parameters([
 choice(name:"NeedUpgradePC",choices:['yes','no'],description: "Do you need upgrade your PC"),
                     [$class: 'DynamicReferenceParameter',
                             choiceType: 'ET_FORMATTED_HTML',
