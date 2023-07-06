@@ -45,8 +45,7 @@ pipeline {
                                                 classpath: [], 
                                                 sandbox: false, 
                                                 script: 
-                                                """
-                                                    if (Option.equals("branch")){
+                                                """ if (Option.equals("branch")){
                                                     inputBox = "<input name='value' class='setting-input' type='text'>"
                                                     return inputBox                                                    
                                                 }                                                
