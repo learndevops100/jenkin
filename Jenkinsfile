@@ -73,8 +73,7 @@ pipeline {
                                             """ if (Option.equals("tag")){
                                                     inputBox = "<input name='value' class='setting-input' type='text'>"
                                                     return inputBox                                                    
-                                                }                                                
-                                                """.stripIndent()
+                                                } """.stripIndent()
                                             ] 
                                         ]
                                  ]     
