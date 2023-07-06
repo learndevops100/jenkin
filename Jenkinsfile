@@ -69,8 +69,8 @@ pipeline {
                                         script: [
                                                 classpath: [], 
                                                 sandbox: false, 
-                                                script: '''
-                                                if (Option.equals("tag")){
+                                                script: 
+                                            ''' if (Option.equals("tag")){
                                                     inputBox = "<input name='value' class='setting-input' type='text'>"
                                                     return inputBox                                                    
                                                 }                                                
