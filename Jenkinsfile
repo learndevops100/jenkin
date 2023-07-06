@@ -8,10 +8,10 @@ pipeline {
                             parameters([
                                 [$class: 'ChoiceParameter', 
                                     choiceType: 'PT_SINGLE_SELECT', 
-                                    description: 'Select the Environemnt from the Dropdown List', 
+                                    description: 'Select the Option from the Dropdown List', 
                                     filterLength: 1, 
                                     filterable: false, 
-                                    name: 'Env', 
+                                    name: 'Option', 
                                     script: [
                                         $class: 'GroovyScript', 
                                         fallbackScript: [
@@ -24,7 +24,7 @@ pipeline {
                                             classpath: [], 
                                             sandbox: false, 
                                             script: 
-                                                "return['dev','stage','prod']"
+                                                "return['Branch','Tag']"
                                         ]
                                     ]
                                 ]
