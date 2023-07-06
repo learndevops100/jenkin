@@ -1,3 +1,5 @@
+pipeline {
+    agent any
 parameters([
 choice(name:"NeedUpgradePC",choices:['yes','no'],description: "Do you need upgrade your PC"),
                     [$class: 'DynamicReferenceParameter',
@@ -59,3 +61,4 @@ choice(name:"NeedUpgradePC",choices:['yes','no'],description: "Do you need upgra
                                     ]
                             ]
     ])
+}
