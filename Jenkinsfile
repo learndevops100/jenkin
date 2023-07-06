@@ -24,7 +24,7 @@ pipeline {
                                             classpath: [], 
                                             sandbox: false, 
                                             script: 
-                                                "return['dev','branch','tag']"
+                                                "return['branch','tag']"
                                         ]
                                     ]
                                 ]
