@@ -74,7 +74,7 @@ pipeline {
                                                     inputBox = "<input name='value' class='setting-input' type='text'>"
                                                     return inputBox                                                    
                                                 }                                                
-                                                '''
+                                                '''.stripIndent()
                                             ] 
                                         ]
                                  ]     
