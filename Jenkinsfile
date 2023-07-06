@@ -31,7 +31,7 @@ pipeline {
                                     choiceType: 'ET_FORMATTED_HTML', 
                                     description: 'Please write branch name',
                                     name: 'Branch',
-                                    omitValueField: false,
+                                    omitValueField: true,
                                     referencedParameters: 'Option', 
                                     script: 
                                         [$class: 'GroovyScript', 
