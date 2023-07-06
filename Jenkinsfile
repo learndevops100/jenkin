@@ -44,12 +44,12 @@ pipeline {
                                         script: [
                                                 classpath: [], 
                                                 sandbox: false, 
-                                                script: '''
+                                                script: """
                                                 if (Option.equals("branch")){
                                                     inputBox = "<input name='value' class='setting-input' type='text'>"
                                                     return inputBox                                                    
                                                 }                                                
-                                                '''
+                                                """
                                             ] 
                                         ]
                                  ],
