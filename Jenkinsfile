@@ -1,8 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'File', defaultValue: 'File1', description: 'Who should I say hello to?'),
-        choice(name:"NeedUpgradePC",choices:['yes','no'],description: "Do you need upgrade your PC")
+        string(name: 'File', defaultValue: 'File1', description: 'Who should I say hello to?')
     }
     stages {
         stage('Parameters'){
@@ -22,6 +21,35 @@ pipeline {
                                             sandbox: false, 
                                             script: 
                                                 "return['dev','stage','prod']"
+                                    ]
+                                ],
+                                [$class: 'CascadeChoiceParameter', 
+                                    choiceType: 'PT_SINGLE_SELECT', 
+                                    description: 'Select the AMI from the Dropdown List',
+                                    name: 'AMI List', 
+                                    referencedParameters: 'Env', 
+                                    script: 
+                                        [$class: 'GroovyScript', 
+                                        fallbackScript: [
+                                                classpath: [], 
+                                                sandbox: false, 
+                                                script: "return['Could not get Environment from Env Param']"
+                                                ], 
+                                        script: [
+                                                classpath: [], 
+                                                sandbox: false, 
+                                                script: '''
+                                                if (Env.equals("dev")){
+                                                    return["ami-sd2345sd", "ami-asdf245sdf", "ami-asdf3245sd"]
+                                                }
+                                                else if(Env.equals("stage")){
+                                                    return["ami-sd34sdf", "ami-sdf345sdc", "ami-sdf34sdf"]
+                                                }
+                                                else if(Env.equals("prod")){
+                                                    return["ami-sdf34sdf", "ami-sdf34ds", "ami-sdf3sf3"]
+                                                }
+                                                '''
+                                            ] 
                                     ]
                                 ],
                                 [$class: 'DynamicReferenceParameter', 
