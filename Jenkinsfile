@@ -55,7 +55,7 @@ pipeline {
                                  ],
                                   [$class: 'DynamicReferenceParameter', 
                                     choiceType: 'ET_FORMATTED_HTML', 
-                                    description: 'Please write branch name',
+                                    description: 'Please write Tag name',
                                     name: 'Tag',
                                     omitValueField: false,
                                     referencedParameters: 'Option', 
