@@ -7,10 +7,11 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Hello, I am building environment'
+                echo "File : $File"
                 sh """
-                touch $"File"
-                echo "i am testing file" >> $"File"
-                zip test.zip $"File"
+                touch $File
+                echo "i am testing file" >> $File
+                zip test.zip $File
                 """
             }
         }
