@@ -83,5 +83,10 @@ pipeline {
                     }
                 }
             }
+             stage('Deploy') {
+            steps {
+                echo 'Hello, I am deploying environment'
+            }
+        }
         }   
 }
