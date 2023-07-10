@@ -87,6 +87,7 @@ pipeline {
             steps {
                 echo 'Hello, I am deploying environment'
                 echo "Your input branch is : $Branch"
+                echo "$Branch is selected branch"
             }
         }
         }   
