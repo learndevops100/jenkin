@@ -86,6 +86,7 @@ pipeline {
              stage('Deploy') {
             steps {
                 echo 'Hello, I am deploying environment'
+                echo "Your input branch is : $Branch"
             }
         }
         }   
